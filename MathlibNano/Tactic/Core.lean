@@ -1,12 +1,16 @@
+module
+
 import Lean.Elab.Term
 import Lean.Elab.Tactic.Basic
 import Lean.Elab.Tactic.ElabTerm
 import Lean.Elab.Tactic.RCases
 import Lean.Meta.Tactic.Assert
 import Lean.Meta.Tactic.Clear
-import Batteries.Lean.Expr
+public import Batteries.Lean.Expr
 
 open Lean.Elab.Tactic Lean Elab Meta
+
+public section
 
 namespace Lean.MVarId
 

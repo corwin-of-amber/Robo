@@ -1,11 +1,14 @@
-import Lean
-import Qq
-import MathlibNano.Tactic.CasesM
-import MathlibNano.Tactic.Core
+module
 
-namespace MathlibNano.Tactic.Tauto
+public meta import Lean
+public meta import Qq
+public meta import MathlibNano.Tactic.CasesM
+public meta import MathlibNano.Tactic.Core
 
-open Lean Elab.Tactic Parser.Tactic Lean.Meta MVarId
+public meta section
+
+open Lean Elab.Tactic Parser.Tactic MVarId
+open Lean.Meta hiding Config
 open Qq
 
 def distribNotOnceAt (hypFVar : Expr) (g : MVarId) : MetaM AssertAfterResult := g.withContext do
@@ -152,5 +155,3 @@ syntax (name := tauto) "tauto" optConfig : tactic
 elab_rules : tactic | `(tactic| tauto $cfg:optConfig) => do
   let _cfg ← elabConfig cfg
   tautology
-
-end MathlibNano.Tactic.Tauto

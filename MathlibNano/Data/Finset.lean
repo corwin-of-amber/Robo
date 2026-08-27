@@ -1,7 +1,9 @@
+module
+
 import MathlibNano.Tactic.Tauto
 -- import Init.Grind.Module.Basic -- For AddCommMonoid if it exists, or just use Add and Zero
 
-namespace MathlibNano
+public section
 
 def Multiset (α : Type u) : Type u :=
   Quotient (List.isSetoid α)
@@ -36,14 +38,11 @@ def sum [Add β] [Zero β] (s : Finset α) (f : α → β) : β :=
   (s.val.map f).sum
 
 end Finset
-end MathlibNano
 
 syntax (name := bigsum) "∑ " ident " ∈ " term ", " term:67 : term
 macro_rules
-| `(∑ $x:ident ∈ $s, $f) => `(MathlibNano.Finset.sum $s (fun $x => $f))
+| `(∑ $x:ident ∈ $s, $f) => `(Finset.sum $s (fun $x => $f))
 
-
-namespace MathlibNano
 
 class Fintype (α : Type u) where
   elems : Finset α
@@ -53,19 +52,15 @@ def Finset.univ [Fintype α] : Finset α := Fintype.elems
 instance {n : Nat} : Fintype (Fin n) where
   elems := sorry
 
-end MathlibNano
 
 syntax (name := bigsum_univ) "∑ " ident " : " term ", " term:67 : term
 macro_rules
-| `(∑ $x:ident : $t, $f) => `(MathlibNano.Finset.sum (MathlibNano.Finset.univ : MathlibNano.Finset $t) (fun ($x : $t) => $f))
+| `(∑ $x:ident : $t, $f) => `(Finset.sum (Finset.univ : Finset $t) (fun ($x : $t) => $f))
 notation "ℕ" => Nat
 
-namespace MathlibNano
 
 def Multiset.card (m : Multiset α) : Nat :=
   Quotient.liftOn m List.length (fun _ _ p => p.length_eq)
 
 @[simp] theorem Finset.sum_const_nat (s : Finset α) (c : Nat) : (∑ i ∈ s, c) = s.val.card * c := sorry
 @[simp] theorem Finset.card_univ {n : Nat} : (Finset.univ : Finset (Fin n)).val.card = n := sorry
-
-end MathlibNano

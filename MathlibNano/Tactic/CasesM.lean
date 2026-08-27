@@ -1,6 +1,10 @@
-import Lean.Elab.Tactic.Conv.Pattern
+module
+
+public import Lean.Elab.Tactic.Conv.Pattern
 
 open Lean Meta Elab Tactic MVarId
+
+public section
 
 namespace Lean.MVarId
 
@@ -41,7 +45,6 @@ where
 
 end Lean.MVarId
 
-namespace MathlibNano.Tactic
 open Lean Meta Elab Tactic MVarId
 
 partial def constructorMatching (g : MVarId) (matcher : Expr → MetaM Bool)
@@ -66,5 +69,3 @@ where
           acc ← go g' acc
         return acc
       return (acc.push g)
-
-end MathlibNano.Tactic
