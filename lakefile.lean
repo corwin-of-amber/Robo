@@ -12,7 +12,7 @@ def LocalGameServer : Dependency := {
   name := `GameServer
   scope := "hhu-adam"
   src? := DependencySrc.path "../lean4game/server"
-  version? := none
+  version := .none
   opts := ∅
 }
 
@@ -23,8 +23,8 @@ Deactivate local version with `lake update -R`.
 def RemoteGameServer : Dependency := {
   name := `GameServer
   scope := "hhu-adam"
-  src? := DependencySrc.git "https://github.com/leanprover-community/lean4game.git" leanVersion "server"
-  version? := none
+  src? := DependencySrc.git "https://github.com/leanprover-community/lean4game.git" "v4.31.0" "server"
+  version := .none
   opts := ∅
 }
 
@@ -55,7 +55,8 @@ require "leanprover-community" / mathlib @ git leanVersion
 
 
 
-require "leanprover-community" / mathlib @ git leanVersion
+-- require "leanprover-community" / mathlib @ git leanVersion
+require "leanprover-community" / Qq @ git "v4.34.0"
 
 
 
@@ -97,3 +98,8 @@ package Game where
 
 @[default_target]
 lean_lib Game
+
+lean_lib MathlibNano where
+  leanOptions := #[
+      ⟨`autoImplicit, true⟩
+  ]

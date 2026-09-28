@@ -1,5 +1,5 @@
 import Game.Metadata.Tactic.Simp
-import Game.Metadata.FromMathlib
+--import Game.Metadata.FromMathlib
 
 -- Babylon, L01_Sum_Simp_Card:
 attribute [game_simp] Finset.sum_const smul_eq_mul mul_one eq_self

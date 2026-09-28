@@ -1,4 +1,4 @@
-import Mathlib.Tactic.Ring
+-- import Mathlib.Tactic.Ring
 namespace Game
 
 macro (name := ring) "ring" : tactic =>

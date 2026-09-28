@@ -2,8 +2,8 @@ import Lean.Elab.Tactic.Basic
 import Lean.Elab.Tactic.Induction
 import Batteries.Tactic.OpenPrivate
 import Batteries.Data.List.Basic
-import Mathlib.Lean.Expr.Basic
-import Mathlib.Tactic.Cases
+-- import Mathlib.Lean.Expr.Basic
+-- import Mathlib.Tactic.Cases
 
 namespace Nat
 
@@ -32,7 +32,7 @@ end Nat
 
 open Lean Parser Tactic
 open Meta Elab Elab.Tactic
-open Mathlib.Tactic
+-- open Mathlib.Tactic
 
 open private getElimNameInfo generalizeTargets generalizeVars from Lean.Elab.Tactic.Induction
 

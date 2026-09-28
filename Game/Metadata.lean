@@ -3,14 +3,15 @@ import GameServer
 import Game.Doc
 
 -- must be imported *before* the custom modifications!
-import Game.Metadata.FromMathlib
+-- import Game.Metadata.FromMathlib
+import MathlibNano
 
-import Game.Metadata.Tactic
-import Game.Metadata.Tactic.simp_list
-import Game.Metadata.MatrixNotation
+--import Game.Metadata.Tactic
+--import Game.Metadata.Tactic.simp_list
+--import Game.Metadata.MatrixNotation
 
 
-/-- subset.def versus subset_iff --/
+-- /-- subset.def versus subset_iff --/
 /- mathlib has three lemmas of this kind
 
   #check Set.subset_def      -- (a)
@@ -22,11 +23,11 @@ import Game.Metadata.MatrixNotation
 
   Current workaround:
 -/
-alias Set.subset_iff := Set.subset_def
+--alias Set.subset_iff := Set.subset_def
 
 
 -- import Game.Metadata.Delaborator
 -- import Game.Metadata.DelaboratorFunOnProd
 -- import Game.Metadata.SetBuilder    -- Marcus: This file is just comment!? So I removed it.
 
-#min_imports
+-- #min_imports

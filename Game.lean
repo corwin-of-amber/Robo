@@ -2,6 +2,7 @@ import Game.Metadata
 
 import Game.Levels.Logo
 import Game.Levels.Implis
+/-
 import Game.Levels.Quantus
 
 import Game.Levels.Saturn
@@ -24,6 +25,7 @@ import Game.Levels.Samarkand
 import Game.Levels.Iso
 
 import Game.Levels.Piazza
+-/
 
 -- *uncomment the following line to get the incomplete planets.*
 -- import Game.DevPlanets
@@ -42,7 +44,7 @@ CaptionLong  "[Game] CaptionLong"
 Prerequisites "[Game] Prerequisites"
 CoverImage "images/Cover.png"
 
-
+/-
 /-! If you need to add manual dependencies in your planet graph, you can do so here: -/
 Dependency Quantus → Piazza -- because of `∀`
 Dependency Prado → Mono     -- beclause of `∃!`
@@ -53,6 +55,7 @@ Dependency Cantor → Ciao
 Dependency Samarkand → Ciao
 Dependency Iso → Ciao
 Dependency Euklid → Ciao
+-/
 
 -- set_option lean4game.showDependencyReasons true
 
