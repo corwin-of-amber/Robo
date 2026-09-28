@@ -1,6 +1,7 @@
 module
 
 import MathlibNano.Tactic.Tauto
+public import MathlibNano.Notation
 -- import Init.Grind.Module.Basic -- For AddCommMonoid if it exists, or just use Add and Zero
 
 public section
@@ -56,7 +57,6 @@ instance {n : Nat} : Fintype (Fin n) where
 syntax (name := bigsum_univ) "∑ " ident " : " term ", " term:67 : term
 macro_rules
 | `(∑ $x:ident : $t, $f) => `(Finset.sum (Finset.univ : Finset $t) (fun ($x : $t) => $f))
-notation "ℕ" => Nat
 
 
 def Multiset.card (m : Multiset α) : Nat :=

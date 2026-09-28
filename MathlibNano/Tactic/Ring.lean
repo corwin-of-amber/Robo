@@ -1,12 +1,24 @@
 module
 
-import Lean
+public meta import Lean
 
-public section
+public meta section
 
-open Lean Elab Tactic Parser.Tactic
+open Lean Meta Elab Tactic
 
--- A minimalist "nano" version of Mathlib's ring tactic that can solve
--- simple commutative ring identities (like n * 2 = 2 * n) by relying on the simplifier
-macro (name := ring) "ring" : tactic =>
-  `(tactic| (simp [Nat.add_comm, Nat.mul_comm, Nat.add_assoc, Nat.mul_assoc, Nat.add_left_comm, Nat.mul_left_comm, Nat.add_mul, Nat.mul_add, Nat.right_distrib, Nat.left_distrib]))
+/-- A "nano" version of Mathlib's `ring`: proves equalities in commutative (semi)rings.
+It discards all propositional hypotheses (so, like `ring`, it does not use assumptions)
+and then relies on `grind`'s commutative ring solver. -/
+elab (name := ring) "ring" : tactic => do
+  let g ← getMainGoal
+  let g ← g.withContext do
+    let mut g := g
+    for ldecl in (← getLCtx).getFVarIds.reverse do
+      let decl ← ldecl.getDecl
+      unless decl.isImplementationDetail do
+        if ← isProp decl.type then
+          g ← g.tryClear ldecl
+    pure g
+  replaceMainGoal [g]
+  try evalTactic (← `(tactic| grind))
+  catch _ => throwError "ring failed to prove the goal"

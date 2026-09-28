@@ -1,4 +1,4 @@
-import Mathlib
+import MathlibNano
 
 
 /- Revision:  add some lemmas and exercises preparing the Boss level of BABYLON
