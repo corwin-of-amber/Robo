@@ -1,4 +1,4 @@
-import Mathlib
+import MathlibNano
 
 /- RING 01  -/
 theorem Robo.add_pow_two (x y : ℕ) : (x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2 := by
