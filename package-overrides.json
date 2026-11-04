@@ -5,7 +5,7 @@
       "name": "Qq",
       "type": "git",
       "url": "https://github.com/leanprover-community/quote4",
-      "rev": "v4.34.0",
+      "rev": "b0256621cb88178e9ad932a53633077b3029e621",
       "configFile": "lakefile.toml",
       "inherited": true
     },
@@ -13,7 +13,7 @@
       "name": "batteries",
       "type": "git",
       "url": "https://github.com/leanprover-community/batteries",
-      "rev": "v4.34.0",
+      "rev": "d4c39b228d4a06f3b00748c2c445a7b9f056a6e3",
       "configFile": "lakefile.toml",
       "inherited": true
     },
@@ -21,7 +21,7 @@
       "name": "i18n",
       "type": "git",
       "url": "https://github.com/hhu-adam/lean-i18n",
-      "rev": "v4.33.1",
+      "rev": "83015d7010f332c2e83bcf2f88c89eb06f9e1d7d",
       "configFile": "lakefile.lean",
       "inherited": true
     }
