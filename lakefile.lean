@@ -56,7 +56,7 @@ require "leanprover-community" / mathlib @ git leanVersion
 
 
 -- require "leanprover-community" / mathlib @ git leanVersion
-require "leanprover-community" / Qq @ git "v4.36.0-rc2"
+require "leanprover-community" / Qq @ git leanVersion
 
 
 
