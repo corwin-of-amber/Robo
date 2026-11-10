@@ -52,24 +52,43 @@ Please follow our [Contribution Guide](./docs/ContributionGuide.md),
 
 ## Building
 
-You can build the game just like a regular Lean project. In particular, inside `Robo/` you should call
+This checkout uses `leanprover/lean4:v4.36.0-rc2` from `lean-toolchain`.
+With elan installed, build the game from the repository root:
 
-```
-lake update -R
+```sh
+python3 scripts/check-dependencies.py
 lake build
 ```
 
-*Note: the repo is set up in a way that `lake update` is NOT destructive and can be called liberally anytime. (This is not true for other Lean projects)*
+The committed `lake-manifest.json` fixes the complete dependency graph. Qq and
+Batteries use 4.36.0-rc2; GameServer and i18n use the tested 4.35 releases.
+This game does not require a mathlib cache download.
 
-*Note: `lake update` will call the two commands `lake exe cache get` (retrieve the latest mathlib cache) and `lake build gameserver` (build the gameserver executable); so if you're not calling `lake update`, you should call these two commands manually.*
+`package-overrides.json` records the revisions needed when preparing a Wasm
+build. Before invoking Lean's `crazy/builder.ts`, fetch those dependencies with
+native Lake:
 
-## Updating Lean/mathlib
+```sh
+lake build --packages=package-overrides.json --no-build || test "$?" -eq 3
+```
 
-In order to update the Lean version used by the game, you should follow these steps:
+Lake's status 3 means compilation is required, which is expected at this step.
+The Wasm builder copies the dependencies into its guest filesystem and converts
+the resolved graph to local paths, so the guest does not fetch packages.
 
-* See what versions are available of `lean4game`: [Releases](https://github.com/leanprover-community/lean4game/releases)
-* Modify the file `lean-toolchain` to contain the string `leanprover/lean4:v4.7.0` where `v4.7.0` is replaced by the newest version available.
-* Call `lake update -R` and `lake build`. Your game now uses the specified Lean version and the corresponding mathlib release.
+## Updating the toolchain or dependencies
+
+Update `lean-toolchain` and the GameServer revision in `lakefile.lean` together.
+Qq follows the selected Lean version. Review the dependency graph after
+`lake update -R`: inherited dependencies can still select older versions.
+Align `package-overrides.json` with the intended revisions in the regenerated
+`lake-manifest.json`, then run the consistency check and rebuild natively and
+with Wasm Lake. Commit both configuration files with the toolchain update.
+The check compares exact revisions and does not replace either build.
+
+The declarations in `lakefile.lean`, resolved lockfile, and Wasm overrides have
+different roles; keep all three. Updating dependencies is an intentional change
+to the locked graph, rather than a routine prerequisite for every build.
 
 ## Refactoring existing worlds
 

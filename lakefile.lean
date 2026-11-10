@@ -23,7 +23,7 @@ Deactivate local version with `lake update -R`.
 def RemoteGameServer : Dependency := {
   name := `GameServer
   scope := "hhu-adam"
-  src? := DependencySrc.git "https://github.com/leanprover-community/lean4game.git" "v4.31.0" "server"
+  src? := DependencySrc.git "https://github.com/leanprover-community/lean4game.git" "v4.35.0" "server"
   version := .none
   opts := ∅
 }
@@ -56,7 +56,7 @@ require "leanprover-community" / mathlib @ git leanVersion
 
 
 -- require "leanprover-community" / mathlib @ git leanVersion
-require "leanprover-community" / Qq @ git "v4.34.0"
+require "leanprover-community" / Qq @ git leanVersion
 
 
 
